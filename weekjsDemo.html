@@ -1,0 +1,26 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>scott weekCalendar</title>
+    <style>
+    </style>
+</head>
+<body>
+<p align="center">
+  <input name="show_time" type="text" id="calendar" size="30" readonly>
+</p>
+<p>
+  <input name="Week_time" type="hidden" value="" />
+</p>
+<script type="text/javascript" src="WeekCalendar.js"></script>
+<script type="">
+    (function (){
+        document.getElementById("calendar").onclick = function (){
+            var weekCalendar1 = new WeekCalendar();
+              weekCalendar1.initCalendar(this);
+        }
+    })();
+</script>
+</body>
+</html>
