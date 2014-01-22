@@ -3,18 +3,18 @@
  * email:wchaowu@163.com
  */
 var configCalendar = {
-    prevYearText:"&#x5411;&#x524D;&#x7FFB; 1 &#x5E74;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;&#x2190;",
-    showYearText:"&#x70B9;&#x51FB;&#x6B64;&#x5904;&#x9009;&#x62E9;&#x5E74;&#x4EFD;",
-    nextYearText:"&#x5411;&#x540E;&#x7FFB; 1 &#x5E74;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;&#x2192;",
-    weekPageUp:"&#x5411;&#x4E0A;&#x5468;&#x7FFB;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;&#x2191;",
-    weekPageDown:"&#x5411;&#x4E0B;&#x7FFB;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;&#x2193;",
-    nextWeek:"&#x4E0B;&#x4E00;&#x5468;",
-    returnNextWeek:"&#x4E0B;&#x4E00;&#x5468;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;N",
-    thisWeek:"&#x672C;  &#x5468;",
-    returnThisWeek:"&#x672C;  &#x5468;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;T",
-    hiddenCalendar:"&#x5173; &#x95ED;&#13;&#x5FEB;&#x6377;&#x952E;&#xFF1A;Esc",
-    closeText:"&#x5173; &#x95ED;"
-
+    prevYearText:"向前翻 1 年&#13快捷键：←",
+    showYearText:"点击此处选择年份",
+    nextYearText:"向后翻 1 年&#13快捷键：→",
+    weekPageUp:"向上周翻&#13快捷键：↑",
+    weekPageDown:"向下翻&#13快捷键：↓",
+    nextWeek:"下一周",
+    returnNextWeek:"下一周&#13快捷键：N",
+    thisWeek:"本  周",
+    returnThisWeek:"本  周&#13快捷键：T",
+    hiddenCalendar:"关 闭&#13快捷键：Esc",
+    closeText:"关 闭",
+    weekText:"周"
 }
 
 function WeekCalendar() // 初始化日历的设置
@@ -79,19 +79,18 @@ function WeekCalendar() // 初始化日历的设置
         }
     };
     this.writeIframe = function () {
-
         var strIframe = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=GBK'><style type='text/css'>"
             + "*{font-size: 12px;}"
             + ".weekList{line-height:24px;cursor:default;}"
             + ".td_year{line-height:22px; cursor:default;background-color:#EEEEEE;}"
-            + ".but_bgcolor{background-color:#EEEEEE; line-height:22px; cursor: pointer;}</style></head>"
+            + ".btn{background-color:#EEEEEE; line-height:22px; cursor: pointer;}</style></head>"
             + "<body onselectstart='return false' style='margin: 0px'><form name='form_'>";
 
         strIframe += "<select name='tmpYearSelect' id='_tmpYearSelect'  style='z-index:1;position:absolute;top:3;left:63;display:none'></select>";
         strIframe += "<table id='top_t' width='100%' border='0' cellspacing='1' cellpadding='0'><tr align='center'>"
-            + "<td width='40' class='but_bgcolor' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" title='"+configCalendar.prevYearText+"'  id='_prevY'><img id='_parent_prevY' src='left.gif' width='5' height='9'/></td>"
+            + "<td width='40' class='btn' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" title='"+configCalendar.prevYearText+"'  id='_prevY'><img id='_parent_prevY' src='left.gif' width='5' height='9'/></td>"
             + "<td class='td_year' onMouseOver=\"this.style.backgroundColor='#EEEEEE'\" onMouseOut=\"this.style.backgroundColor=''\" id='_funYearSelect' title='"+configCalendar.showYearText+"'>&nbsp;</td>"
-            + "<td width='40' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" class='but_bgcolor' title='"+configCalendar.nextYearText+"' id='_nextY'><img id='_parent_nextY' src='right.gif' width='5' height='9' /></td></tr></table>";
+            + "<td width='40' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" class='btn' title='"+configCalendar.nextYearText+"' id='_nextY'><img id='_parent_nextY' src='right.gif' width='5' height='9' /></td></tr></table>";
         strIframe += "<table id='main_t' width='100%' border='0' cellspacing='0' cellpadding='0'> "
             + "<tr><td  id='_weekPageUp' title='"+configCalendar.weekPageUp+"' style='background:url(up.gif) no-repeat center; height: 12px;'></td></tr>";
         for (var x = 0; x < 6; x++) {
@@ -99,11 +98,11 @@ function WeekCalendar() // 初始化日历的设置
         }
         strIframe += "<tr><td  id='_weekPageDown' title='"+configCalendar.weekPageUp+"' style=' background: url(down.gif) no-repeat center;height: 12px;'></td></tr></table>";
         strIframe += "<table id='bottom_t' width='100%' border='0' cellspacing='1' cellpadding='0' align='center'><tr align='center'>"
-            + "<td class='but_bgcolor' title='"+configCalendar.returnNextWeek+"' id='_returnNextWeek' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" width='60'>"+configCalendar.nextWeek+"</td><td class='but_bgcolor' title='"+configCalendar.returnThisWeek+"' id=\"_returnThisWeek\" onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" >"+configCalendar.thisWeek+"</td>"
-            + "<td class='but_bgcolor' title='"+configCalendar.hiddenCalendar+"' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\"  width='60' id='_hiddenCalendar'>"+configCalendar.closeText+"</td></tr></table></form></body></html>";
+            + "<td class='btn' title='"+configCalendar.returnNextWeek+"' id='_returnNextWeek' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" width='60'>"+configCalendar.nextWeek+"</td><td class='btn' title='"+configCalendar.returnThisWeek+"' id=\"_returnThisWeek\" onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\" >"+configCalendar.thisWeek+"</td>"
+            + "<td class='btn' title='"+configCalendar.hiddenCalendar+"' onMouseOver=\"this.style.backgroundColor='#76D7DC'\" onMouseOut=\"this.style.backgroundColor=''\"  width='60' id='_hiddenCalendar'>"+configCalendar.closeText+"</td></tr></table></form></body></html>";
             with(_that.iframeDocument){
                 writeln(strIframe);
-                close();
+                  close();
                }
            var b = _that.iframeDocument;
             _that.weekObj = b.getElementById("main_t").getElementsByTagName("td");
@@ -114,7 +113,7 @@ function WeekCalendar() // 初始化日历的设置
             }
         var tmpYearSelect = b.getElementById("_tmpYearSelect");
         _that.addEvent(b.body, "click", function (e) {
-            e = e || f.event;
+            e = e || window.event;
             e = e.target || e.srcElement;
             if ((e = e.id && e.id.replace("_parent","").substring(1), _that[e])) _that[e]();
         });
@@ -210,7 +209,7 @@ function WeekCalendar() // 初始化日历的设置
         min = (max == 9999) ? max - n * 2 : min;
         max = (min == 1000) ? min + n * 2 : max;
         for (var i = min; i <= max; i++)
-            e.options.add(new Option(i + "年", i));
+            e.options.add(new Option(i + "年", i+""));
         e.style.display = "";
         e.value = y;
         e.focus();
@@ -309,8 +308,6 @@ function WeekCalendar() // 初始化日历的设置
 
             weekEndDate = _that.GetNextNumDate(weekStartDate,6);
 
-            //	alert("n="+n+"  yearDayCount="+yearDayCount+"  weekcount="+_that.weekcount);
-
             //获得当前周数
             if((weekStartDate <= _that.today)&&(weekEndDate >= _that.today)){
                 _that.weeknum = _that.weekcount;
@@ -322,14 +319,14 @@ function WeekCalendar() // 初始化日历的设置
                 break;
             }
 
-            var startm = parseInt(weekStartDate.getMonth())+1;
-            var start_m = startm >=10 ? startm : "0"+startm;
+            var startMonth = parseInt(weekStartDate.getMonth())+1;
+            var start_m = startMonth >=10 ? startMonth : "0"+startMonth;
             var start_d = weekStartDate.getDate() >=10 ? weekStartDate.getDate() : "0"+weekStartDate.getDate();
-            var endm = parseInt(weekEndDate.getMonth())+1;
-            var end_m = endm >=10 ? endm : "0"+endm;
+            var endMonth = parseInt(weekEndDate.getMonth())+1;
+            var end_m = endMonth >=10 ? endMonth : "0"+endMonth;
             var end_d = weekEndDate.getDate() >=10 ? weekEndDate.getDate() : "0"+weekEndDate.getDate();
             var w = _that.weekcount >=10 ? _that.weekcount :"0"+_that.weekcount;
-            _that.weekArray[_that.weekcount-1] =w+"周"+weekStartDate.getFullYear()+"年("+start_m+"-"+start_d+"至"+end_m+"-"+end_d+")";
+            _that.weekArray[_that.weekcount-1] = w.toString()+"周"+weekStartDate.getFullYear()+"年("+start_m.toString()+"-"+start_d.toString()+"至"+end_m+"-"+end_d+")";
 
             if(n >=yearDayCount){
 
@@ -337,7 +334,6 @@ function WeekCalendar() // 初始化日历的设置
             }
             _that.weekcount++;
         }
-        //alert(WebCalendar.weekArray);
         //显示周数
         if(_that.weeknum <=6){
             for(var a=1;a<7; a++){
@@ -438,19 +434,8 @@ function WeekCalendar() // 初始化日历的设置
             _that.weekshow_endNum = num+6;
         }
     };
-    this.initCalendar = function (obj) // 主调函数
-    {
-        if(typeof(obj) == "string"){
-            obj = _that.getObjectById(obj);
-        }
-        var e  = obj;
-        _that.writeIframe();
+    this.setPosition =  function (e) {
         var o = _that.calendar.style;
-        _that.eventSrc = e;
-        _that.objExport = e;
-        //WebCalendar.objHidExport = eval(arguments[0]);
-
-
         var t = e.offsetTop, h = e.clientHeight, l = e.offsetLeft, p = e.type;
         //alert(e.offsetTop + " " + e.clientHeight + " " + e.offsetLeft + "  "	+ e.type);
         while (e = e.offsetParent) {
@@ -461,7 +446,6 @@ function WeekCalendar() // 初始化日历的设置
         this.iframeDocument.body.focus();
         var cw = _that.calendar.clientWidth, ch = _that.calendar.clientHeight;
         var dw = document.body.clientWidth, dl = document.body.scrollLeft, dt = document.body.scrollTop;
-
         if (document.body.clientHeight + dt - t - h >= ch)
             o.top = (p == "image") ? t + h : t + h + 6;
         else
@@ -470,11 +454,26 @@ function WeekCalendar() // 初始化日历的设置
             o.left = l;
         else
             o.left = (dw >= cw) ? dw - cw + dl : dl;
+    };
+    this.initCalendar = function (obj) // 主调函数
+    {
+        if(typeof(obj) == "string"){
+            obj = _that.getObjectById(obj);
+        }
+        var e  = obj;
+        _that.eventSrc = e;
+        _that.objExport = e;
+        _that.writeIframe();
+        _that.setPosition(e);
         _that.writeCalendar();
       _that.addEvent(document,"click", function (){
             if(_that.eventSrc != window.event.srcElement)_that.hiddenCalendar();
         });
+        _that.addEvent(window,"resize", function(){
+           _that.setPosition(_that.objExport);
+        });
         _that.addEvent(obj,"click",function (){
+
             _that.writeCalendar();
             _that.showCalendar();
             var e = window.event||event;
@@ -483,11 +482,12 @@ function WeekCalendar() // 初始化日历的设置
                 e.stopPropagation();
             }
             else {
-                //否则，我们需要使用IE的方式来取消事件冒泡
+                //否则，我们需要使用IE的方式来取消事件冒泡�
                 window.event.cancelBubble = true;
                 return false;
             }
-        })
+        });
+        _that.hiddenCalendar();
 
     }
 
